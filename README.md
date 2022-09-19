@@ -18,12 +18,13 @@ contract Lottery{
     
     // receive function is declared to receive Ether from participents 
    
-   receive () payable external{
-        // if player sends exactly 0.5 ETH then the forward operation will be continued
+     receive () payable external
+     {
+      // if player sends exactly 0.5 ETH then the forward operation will be continued
         require(msg.value == 0.5 ether,"please send 0.5 ether only");
         // appending the player to the players array
         players.push(payable(msg.sender));
-    }
+     }
     
     // getting the contract's balance in wei
     
@@ -33,7 +34,7 @@ contract Lottery{
         return address(this).balance;
     }
    
-   // function that returns a long random no . which is used for getting the winner
+   // function that returns a long random no which is used for getting the winner
     
     function random() internal view returns(uint){
        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players.length)));
