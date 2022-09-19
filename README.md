@@ -25,14 +25,16 @@ contract Lottery{
     }
     
     // getting the contract's balance in wei
-    function getBalance() public view returns(uint){
+    
+      function getBalance() public view returns(uint){
         
         require(msg.sender == manager); // only the manager is allowed to call the function 
         return address(this).balance;
     }
    
    // function that returns a long random no . which is used for getting the winner
-    function random() internal view returns(uint){
+   
+     function random() internal view returns(uint){
        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players.length)));
     }
     
