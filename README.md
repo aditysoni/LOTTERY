@@ -11,13 +11,14 @@ contract Lottery{
     
     
      
-    constructor()                 // declaring the constructor 
+    constructor()                  // declaring the constructor 
     { 
-     manager = msg.sender;        // intializing the manager variable with the contract that deploys the contract
+     manager = msg.sender;         // intializing the manager variable with the contract that deploys the contract
     }
     
     // receive function is declared to receive Ether from participents 
-    receive () payable external{
+   
+   receive () payable external{
         // if player sends exactly 0.5 ETH then the forward operation will be continued
         require(msg.value == 0.5 ether,"please send 0.5 ether only");
         // appending the player to the players array
@@ -25,6 +26,7 @@ contract Lottery{
     }
     
     // getting the contract's balance in wei
+    
     function getBalance() public view returns(uint){
         
         require(msg.sender == manager); // only the manager is allowed to call the function 
@@ -32,12 +34,14 @@ contract Lottery{
     }
    
    // function that returns a long random no . which is used for getting the winner
+    
     function random() internal view returns(uint){
        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players.length)));
     }
     
     
     // selection of the winner
+    
     function pickWinner() public{
         // only the manager can pick a winner 
         require(msg.sender == manager);
